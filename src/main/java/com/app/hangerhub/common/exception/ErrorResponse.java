@@ -1,7 +1,7 @@
 package com.app.hangerhub.common.exception;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -10,5 +10,5 @@ public class ErrorResponse {
     private String message;
     private LocalDateTime timestamp;
 
-    public ErrorResponse(String notFound, String message) {}
+    public ErrorResponse(String code, String message) {}
 }
