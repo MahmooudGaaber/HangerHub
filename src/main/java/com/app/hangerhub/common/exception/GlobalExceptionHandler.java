@@ -55,5 +55,6 @@ public class GlobalExceptionHandler {
                 .orElse("Validation error");
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorResponse("VALIDATION_ERROR", message)); }
+                .body(new ErrorResponse("VALIDATION_ERROR", message));
+    }
 }
