@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: hangerhub-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: hangerhub_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: hangerhub-rabbitmq
+    ports:
+      - "5672:5672"   # RabbitMQ port
+      - "15672:15672" # Management UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: hangerhub-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  mysql_data:

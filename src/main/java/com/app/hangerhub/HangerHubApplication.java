@@ -6,7 +6,6 @@ import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 
 @SpringBootApplication
 public class HangerHubApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(HangerHubApplication.class, args);
     }
