@@ -2,9 +2,16 @@ package com.app.hangerhub.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 //? use to tell that we mark this class as a configuration class on the app
@@ -38,5 +45,24 @@ public class SecurityConfig {
 
         //* build the last version of HTTP-WEB-SECURITY
         return http.build();
+    }
+
+    //? to overwrite AuthenticationProvider in app
+    @Bean
+    public AuthenticationProvider authenticationProvider (
+            UserDetailsService userDetailsService,
+            PasswordEncoder passwordEncoder
+    ) {
+        //? DaoAuthenticationProvider implement AuthenticationProvider
+        //? i can't user AuthenticationProvider Direct because it's an Interface
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        //! can't get use in production ... deprecated
+        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+         return provider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
