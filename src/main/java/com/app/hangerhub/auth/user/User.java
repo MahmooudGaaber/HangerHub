@@ -50,7 +50,7 @@ public class User {
     private String phone;
 
     @Column(nullable = false)
-    private boolean active = true;
+    private boolean enabled = true;
 
     @CreationTimestamp
     @Column(updatable = false)

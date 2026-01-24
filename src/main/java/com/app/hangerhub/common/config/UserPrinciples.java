@@ -12,10 +12,10 @@ import java.util.Collections;
 public class UserPrinciples implements UserDetails {
 
 
-    private User userModel;
+    private User user;
 
     public UserPrinciples(User userModel) {
-        this.userModel = userModel;
+        this.user = userModel;
     }
 
     @Override
@@ -25,12 +25,12 @@ public class UserPrinciples implements UserDetails {
 
     @Override
     public @Nullable String getPassword() {
-        return userModel.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userModel.getFirstName() + " " + userModel.getLastName();
+        return user.getFirstName() + " " + user.getLastName();
     }
 
     @Override
@@ -50,6 +50,6 @@ public class UserPrinciples implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return user.isEnabled();
     }
 }
