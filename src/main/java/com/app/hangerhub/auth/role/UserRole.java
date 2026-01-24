@@ -1,10 +1,14 @@
 package com.app.hangerhub.auth.role;
 
+import com.app.hangerhub.auth.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "roles")
 @Getter
@@ -28,4 +32,8 @@ public class UserRole {
     @Size(max = 255, message = "Description must not exceed 255 characters")
     @Column(length = 255)
     private String description;
+
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users = new HashSet<>();
+
 }
