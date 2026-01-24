@@ -1,22 +1,20 @@
 package com.app.hangerhub.common.config;
 
-import com.app.hangerhub.auth.user.UserModel;
+import com.app.hangerhub.auth.user.User;
 import org.jspecify.annotations.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class UserPrinciples implements UserDetails {
 
 
-    private UserModel userModel;
+    private User userModel;
 
-    public UserPrinciples(UserModel userModel) {
+    public UserPrinciples(User userModel) {
         this.userModel = userModel;
     }
 
@@ -32,7 +30,7 @@ public class UserPrinciples implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userModel.getUsername();
+        return userModel.getFirstName() + " " + userModel.getLastName();
     }
 
     @Override
