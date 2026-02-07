@@ -1,6 +1,6 @@
 package com.app.hangerhub.common.config;
 
-import com.app.hangerhub.auth.user.User;
+import com.app.hangerhub.auth.user.UserEntity;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,9 +12,9 @@ import java.util.Collections;
 public class UserPrinciples implements UserDetails {
 
 
-    private User user;
+    private UserEntity user;
 
-    public UserPrinciples(User userModel) {
+    public UserPrinciples(UserEntity userModel) {
         this.user = userModel;
     }
 

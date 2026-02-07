@@ -1,6 +1,6 @@
 package com.app.hangerhub.auth.user;
 
-import com.app.hangerhub.auth.role.UserRole;
+import com.app.hangerhub.auth.role.UserRoleEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -18,7 +18,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,7 +65,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<UserRole> roles = new HashSet<>();
+    private Set<UserRoleEntity> roles = new HashSet<>();
 
 
 }
