@@ -25,26 +25,24 @@ public class SecurityConfig {
     //? it's overwrite any propertesß
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) {
-
         //* Disable CSRF on Security Filter Chain
         http.csrf(customizer -> customizer.disable() );
-
-
         //* Make a Filter Chain To Make Sure That Any Request Send To
         //* Me Must Be Authenticated
         http.authorizeHttpRequests(request -> request
                 .anyRequest()
                 .authenticated() );
-
         //* enable form for login with enable the Web Security ( For Web Users )
         http.formLogin(Customizer.withDefaults());
-
         //* enable form for login with enable the Web Security ( For Postman )
         http.httpBasic(Customizer.withDefaults());
-
-
         //* build the last version of HTTP-WEB-SECURITY
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     //? to overwrite AuthenticationProvider in app
@@ -57,12 +55,9 @@ public class SecurityConfig {
         //? i can't user AuthenticationProvider Direct because it's an Interface
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         //! can't get use in production ... deprecated
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+        provider.setPasswordEncoder(passwordEncoder);
          return provider;
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
 }
